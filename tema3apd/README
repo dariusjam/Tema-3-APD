@@ -1,0 +1,27 @@
+Mangea Liviu Darius 334CA
+
+Fiecarui proces ii sunt asignate un numar de height / numtasks linii pe
+care trebuie sa le calculeze in afara de procesul cu cel mai mare rank
+care trebuie sa calculeze si liniile care au mai ramas din eventuala
+impartire cu rest la numarul de taskuri.
+
+In implementarea temei, procesul de rank 0 (master-ul), citeste datele din
+fisierul de intrare, le pune intr-un vector info si le trimite cu MPI_Send
+catre celelalte procese. Dupa aceea asteapta informatiile calculate de
+celelalte procese care vin linie cu linie folosind primitiva MPI_Recv.
+Informatiile vin de la procese in ordinea descrescatoare a rankului deoarece
+matricea trebuie afisata de jos in sus. Toate cele de mai sus se fac intr-un
+if(rank == 0), urmand ca restul codului sa fie executat de toate procesele.
+
+In continuare, fiecare proces in afara de master primeste informatiile de
+intrare.
+
+Toate procesele aplica pe o bucata din matrice algoritmul corespunzator 
+din enunt.
+
+Dupa fiecare linie calculata, toate procesele in afara de master trimit linia
+catre acesta, iar masterul scrie direct in fisier, el fiind si ultimul care
+scrie ultima bucata din matrice.
+
+
+
